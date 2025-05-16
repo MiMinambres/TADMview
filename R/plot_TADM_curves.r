@@ -122,7 +122,8 @@ for (i in liquid_classes){
 			colnames(reshape_table) <- c("Time", "TADM_value", "Channel")
 			
 			plot_title <- paste("Liquid class: ", i, "    ||    Volume: ", j, "    ||    Step: ", k, sep = "")
-			
+
+			if(ncols_table > 2){
 			for (m in (3:(ncols_table))){
 				
 				temp_reshape_table <- TADM_table[, c(1,m)]
@@ -133,7 +134,7 @@ for (i in liquid_classes){
 				
 				reshape_table <- rbind(reshape_table, temp_reshape_table)
 				}
-			
+			}
 			graph <- ggplot2::ggplot(reshape_table, ggplot2::aes(x=Time, y=TADM_value, group=Channel, color=Channel)) +
 			ggplot2::geom_line() + ggplot2::ggtitle(plot_title)
 			
