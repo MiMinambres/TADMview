@@ -135,15 +135,18 @@ for (i in liquid_classes){
 				reshape_table <- rbind(reshape_table, temp_reshape_table)
 				}
 			}
+			
+			n_channels <- length(unique(reshape_table$Channel))
+			
+			if(n_channels > 10){
+			plot_title <- paste(plot_title, "	***too many channels, legend is not displayed.", sep = "")
+			}
+			
 			graph <- ggplot2::ggplot(reshape_table, ggplot2::aes(x=Time, y=TADM_value, group=Channel, color=Channel)) +
 			ggplot2::geom_line() + ggplot2::ggtitle(plot_title)
 
-			n_channels <- length(unique(reshape_table$Channel))
 			if(n_channels > 10){
-				
 			graph <- graph + ggplot2::theme(legend.position="none")
-			
-			plot_title <- paste(plot_title, "	***too many channels, legend is not displayed.", sep = "")
 			}
 			
 			if(! exists("graph_list")){graph_list <- list(graph)}else{graph_list <- c(graph_list, list(graph))}
