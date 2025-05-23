@@ -140,7 +140,11 @@ for (i in liquid_classes){
 
 			n_channels <- length(unique(reshape_table$Channel))
 			if(n_channels > 10){
-			graph <- graph + ggplot2::theme(legend.position="none")}
+				
+			graph <- graph + ggplot2::theme(legend.position="none")
+			
+			plot_title <- paste(plot_title, "	***too many channels, legend is not displayed.", sep = "")
+			}
 			
 			if(! exists("graph_list")){graph_list <- list(graph)}else{graph_list <- c(graph_list, list(graph))}
 
