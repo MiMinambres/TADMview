@@ -137,8 +137,10 @@ for (i in liquid_classes){
 			}
 			graph <- ggplot2::ggplot(reshape_table, ggplot2::aes(x=Time, y=TADM_value, group=Channel, color=Channel)) +
 			ggplot2::geom_line() + ggplot2::ggtitle(plot_title)
-			graph <- graph + ggplot2::theme(legend.position="bottom")
-			graph <- graph + ggplot2::guides(fill=ggplot2::guide_legend(nrow=5, byrow=TRUE))
+
+			n_channels <- length(unique(reshape_table$Channel))
+			if(n_channels > 10){
+			graph <- graph + ggplot2::theme(legend.position="none")}
 			
 			if(! exists("graph_list")){graph_list <- list(graph)}else{graph_list <- c(graph_list, list(graph))}
 
